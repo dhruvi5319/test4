@@ -27,14 +27,14 @@ A four-phase build delivering a frontend-only weather application that answers "
   3. User can tap a GPS button to auto-detect location; if permission is denied, the search input remains usable with no blank screen or stuck state
   4. User can toggle between °C and °F, and the preference persists after page reload
   5. User sees a skeleton loading state while data is fetching and a clear error message if the API call fails — never a blank screen
-**Plans**: TBD
+**Plans**: 5 plans
 
 Plans:
-- [ ] 01-01: Project scaffold (Vite + React 19 + TypeScript + Tailwind CSS v4 + TanStack Query setup)
-- [ ] 01-02: Open-Meteo API layer (`useGeocode` + `useWeather` hooks, `timezone=auto`, staleTime 10min)
-- [ ] 01-03: LocationBar component (city search autocomplete + GPS opt-in button)
-- [ ] 01-04: CurrentConditions hero component (temperature, feels-like, condition icon, high/low, precip%, humidity, wind)
-- [ ] 01-05: °C/°F toggle with localStorage persistence + skeleton/error states
+- [ ] 01-01-PLAN.md — Vite + React 19 + TypeScript + Tailwind CSS v4 + TanStack Query scaffold
+- [ ] 01-02-PLAN.md — Open-Meteo API layer (useGeocode + useWeather hooks, timezone=auto, staleTime 10min)
+- [ ] 01-03-PLAN.md — LocationBar component (city search autocomplete + GPS opt-in button)
+- [ ] 01-04-PLAN.md — CurrentConditions hero component (temperature, feels-like, condition icon, high/low, precip%, humidity, wind)
+- [ ] 01-05-PLAN.md — °C/°F toggle with localStorage persistence + skeleton/error states
 
 ### Phase 2: Forecast Views
 **Goal**: Users can see a complete weather picture — hourly conditions for the next 24 hours and a 7-day daily forecast summary
@@ -96,7 +96,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation + Current Conditions | 0/5 | Not started | - |
+| 1. Foundation + Current Conditions | 0/5 | Planned | - |
 | 2. Forecast Views | 0/3 | Not started | - |
 | 3. Details + Polish | 0/4 | Not started | - |
 | 4. Quality + Accessibility Hardening | 0/4 | Not started | - |
