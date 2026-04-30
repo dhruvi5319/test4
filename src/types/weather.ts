@@ -9,6 +9,7 @@ export interface CurrentWeather {
   windSpeed: number
   windDirection: number
   isDay: number // 0 or 1 from Open-Meteo
+  visibility: number // metres
 }
 
 export interface HourlyWeather {

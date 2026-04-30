@@ -82,13 +82,13 @@ Plans:
   3. If a searched city is not found or is ambiguous, user sees a clear "City not found — try a different spelling" message rather than a blank result or silent failure
   4. If the network is offline or the API returns an error, the app displays the last cached data (if available) with a "showing data from X minutes ago" indicator, or a friendly "unable to load weather" message if no cache exists
   5. App is live at a public HTTPS URL (Vercel deployment), geolocation works correctly (requires HTTPS), and the Open-Meteo CC BY 4.0 attribution footer is visible
-**Plans**: TBD
+**Plans**: 4 plans
 
 Plans:
-- [ ] 04-01: Full keyboard navigation + `aria-live` regions + screen reader label audit
-- [ ] 04-02: WCAG AA automated + manual audit (contrast, color-not-only, touch targets) + fixes
-- [ ] 04-03: Error state completions (city-not-found, disambiguation, network-offline graceful degradation with cached data)
-- [ ] 04-04: Vercel deployment + HTTPS verification + Open-Meteo attribution footer
+- [ ] 04-01-PLAN.md — Keyboard nav hardening + aria-describedby + skip link + aria-live region permanence
+- [ ] 04-02-PLAN.md — axe-core dev audit integration + TemperatureTrendChart sr-only table + touch target confirmation
+- [ ] 04-03-PLAN.md — Offline banner + stale-cache display + city-not-found inline message
+- [ ] 04-04-PLAN.md — vercel.json SPA routing config + README deployment docs + attribution footer audit
 
 ## Progress
 

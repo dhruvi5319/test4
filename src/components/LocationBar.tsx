@@ -139,6 +139,10 @@ export default function LocationBar({ onLocationSelect, currentLocation }: Locat
 
   return (
     <div className="relative w-full">
+      {/* Screen reader hint — always in DOM */}
+      <p id="search-hint" className="sr-only">
+        Type 2 or more characters to see city suggestions. Use arrow keys to navigate, Enter to select, Escape to close.
+      </p>
       <div className="flex gap-2">
         {/* Search input */}
         <div className="relative flex-1">
@@ -153,6 +157,7 @@ export default function LocationBar({ onLocationSelect, currentLocation }: Locat
             aria-autocomplete="list"
             aria-controls="geocode-listbox"
             aria-label="Search for a city"
+            aria-describedby="search-hint"
             placeholder="Search for a city..."
             value={inputValue}
             onChange={e => {

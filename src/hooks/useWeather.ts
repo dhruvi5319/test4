@@ -14,6 +14,7 @@ function mapResponse(raw: OpenMeteoResponse, unit: WeatherData['unit']): Weather
     windSpeed: raw.current.wind_speed_10m,
     windDirection: raw.current.wind_direction_10m,
     isDay: raw.current.is_day,
+    visibility: raw.current.visibility,
   }
 
   const hourly: HourlyWeather[] = raw.hourly.time.map((time, i) => ({
