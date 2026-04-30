@@ -6,6 +6,7 @@ import { useUnitPreference } from './useUnitPreference'
 
 function mapResponse(raw: OpenMeteoResponse, unit: WeatherData['unit']): WeatherData {
   const current: CurrentWeather = {
+    time: raw.current.time,
     temperature: raw.current.temperature_2m,
     feelsLike: raw.current.apparent_temperature,
     humidity: raw.current.relative_humidity_2m,

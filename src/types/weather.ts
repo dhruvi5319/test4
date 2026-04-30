@@ -1,6 +1,7 @@
 export type UnitSystem = 'metric' | 'imperial'
 
 export interface CurrentWeather {
+  time: string  // ISO-8601 in location timezone, e.g. "2026-04-30T14:00"
   temperature: number
   feelsLike: number
   humidity: number

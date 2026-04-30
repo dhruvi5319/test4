@@ -42,12 +42,11 @@ export default function HourlyForecast({ lat, lon }: HourlyForecastProps) {
     return <p className="text-slate-400 text-sm">Hourly forecast unavailable</p>
   }
 
-  // Find start index: first hourly entry at or after current time
-  const currentTimePrefix = data.current.isDay !== undefined
-    ? new Date().toISOString().slice(0, 13)
-    : new Date().toISOString().slice(0, 13)
-
-  let startIdx = data.hourly.findIndex(h => h.time >= currentTimePrefix)
+  // Find start index: first hourly entry at or after current API time
+  // Use data.current.time (location-timezone ISO string e.g. "2026-04-30T14:00")
+  // to avoid UTC vs local-timezone mismatch with new Date().toISOString()
+  const currentTimePrefix = data.current.time.slice(0, 13) // "YYYY-MM-DDTHH"
+  let startIdx = data.hourly.findIndex(h => h.time.slice(0, 13) >= currentTimePrefix)
   if (startIdx === -1) startIdx = 0
 
   const cards = data.hourly.slice(startIdx, startIdx + 24)
