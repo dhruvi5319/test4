@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import CurrentConditions from './components/CurrentConditions'
+import DailyForecast from './components/DailyForecast'
+import HourlyForecast from './components/HourlyForecast'
 import LocationBar from './components/LocationBar'
 import SettingsBar from './components/SettingsBar'
 import type { Location } from './types/location'
@@ -21,7 +23,11 @@ export default function AppShell() {
 
         {/* Weather content */}
         {activeLocation ? (
-          <CurrentConditions location={activeLocation} />
+          <div className="space-y-4">
+            <CurrentConditions location={activeLocation} />
+            <HourlyForecast lat={activeLocation.lat} lon={activeLocation.lon} />
+            <DailyForecast lat={activeLocation.lat} lon={activeLocation.lon} />
+          </div>
         ) : (
           <div className="text-center text-slate-400 py-20">
             <p className="text-xl font-medium mb-2">Simple Weather</p>
