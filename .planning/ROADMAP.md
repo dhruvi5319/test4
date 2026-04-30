@@ -38,7 +38,7 @@ Plans:
 - [ ] 01-05-PLAN.md — °C/°F toggle with localStorage persistence + skeleton/error states
 
 ### Phase 2: Forecast Views
-**Status**: awaiting verify
+**Status**: In Progress
 **Goal**: Users can see a complete weather picture — hourly conditions for the next 24 hours and a 7-day daily forecast summary
 **Depends on**: Phase 1
 **Requirements**: REQ-03 (multi-day forecast), REQ-04 (weather icons/visual indicators)
