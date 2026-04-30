@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import CurrentConditions from './components/CurrentConditions'
 import DailyForecast from './components/DailyForecast'
 import FreshnessIndicator from './components/FreshnessIndicator'
@@ -12,19 +12,33 @@ import { useWeather } from './hooks/useWeather'
 import type { Location } from './types/location'
 import { getWeatherCondition } from './utils/weatherCodes'
 
-
+function useIsOffline() {
+  const [offline, setOffline] = useState(!navigator.onLine)
+  useEffect(() => {
+    const on = () => setOffline(false)
+    const off = () => setOffline(true)
+    window.addEventListener('online', on)
+    window.addEventListener('offline', off)
+    return () => {
+      window.removeEventListener('online', on)
+      window.removeEventListener('offline', off)
+    }
+  }, [])
+  return offline
+}
 
 export default function AppShell() {
   const [activeLocation, setActiveLocation] = useState<Location | null>(null)
   const { locations: recentLocations, addLocation } = useRecentLocations()
+  const isOffline = useIsOffline()
 
   function handleLocationSelect(location: Location) {
     setActiveLocation(location)
     addLocation(location)
   }
 
-  // Get weather data for background (deduplicates via TanStack Query cache)
-  const { data: weatherData } = useWeather(
+  // Get weather data for background gradient (cache-deduplicated)
+  const { data: weatherData, isError: weatherError } = useWeather(
     activeLocation?.lat ?? null,
     activeLocation?.lon ?? null
   )
@@ -43,7 +57,37 @@ export default function AppShell() {
         bgClass ? `bg-gradient-to-br ${bgClass}` : 'bg-slate-900'
       }`}
     >
-      <div className="max-w-2xl w-full mx-auto px-4 py-8 space-y-4 flex-1">
+      {/* Skip to main content — keyboard/screen reader navigation */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded focus:outline-none focus:ring-2 focus:ring-white"
+      >
+        Skip to main content
+      </a>
+
+      {/* Offline banner */}
+      {isOffline && (
+        <div
+          role="alert"
+          aria-live="assertive"
+          className="bg-amber-600 text-white text-sm text-center py-2 px-4"
+        >
+          You're offline — showing last known weather
+        </div>
+      )}
+
+      {/* Network error banner (online but API failed) */}
+      {!isOffline && weatherError && activeLocation && !weatherData && (
+        <div
+          role="alert"
+          aria-live="assertive"
+          className="bg-red-800/80 text-white text-sm text-center py-2 px-4"
+        >
+          Unable to load weather — check your connection and try again
+        </div>
+      )}
+
+      <div id="main-content" className="max-w-2xl w-full mx-auto px-4 py-8 space-y-4 flex-1">
         {/* Location search + GPS */}
         <LocationBar
           onLocationSelect={handleLocationSelect}
@@ -59,11 +103,13 @@ export default function AppShell() {
         {/* °C / °F toggle */}
         <SettingsBar />
 
+        {/* Freshness indicator */}
+        <FreshnessIndicator dataUpdatedAt={weatherData?.fetchedAt} />
+
         {/* Weather content */}
         {activeLocation ? (
           <div className="space-y-4">
             <CurrentConditions location={activeLocation} />
-            <FreshnessIndicator dataUpdatedAt={weatherData?.fetchedAt} />
             <HourlyForecast lat={activeLocation.lat} lon={activeLocation.lon} />
             <DailyForecast lat={activeLocation.lat} lon={activeLocation.lon} />
             <WeatherDetails lat={activeLocation.lat} lon={activeLocation.lon} timezone={timezone} />

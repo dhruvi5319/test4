@@ -40,9 +40,21 @@ export default function CurrentConditions({ location }: CurrentConditionsProps) 
   const { data, isLoading, isError, refetch } = useWeather(location.lat, location.lon)
   const { unit } = useUnitPreference()
 
-  if (isLoading) return <CurrentConditionsSkeleton />
-  if (isError || !data) return <WeatherErrorCard onRetry={() => refetch()} />
+  // aria-live wrapper is ALWAYS in the DOM (FR-11 requirement — conditional render breaks screen reader announcements)
+  return (
+    <div aria-live="polite" aria-atomic="true">
+      {isLoading && <CurrentConditionsSkeleton />}
+      {(isError || (!isLoading && !data)) && <WeatherErrorCard onRetry={() => refetch()} />}
+      {data && <CurrentConditionsContent location={location} data={data} unit={unit} />}
+    </div>
+  )
+}
 
+function CurrentConditionsContent({ location, data, unit }: {
+  location: CurrentConditionsProps['location']
+  data: NonNullable<ReturnType<typeof useWeather>['data']>
+  unit: ReturnType<typeof useUnitPreference>['unit']
+}) {
   const current = data.current
   const daily = data.daily.length > 0 ? data.daily[0] : null
   const condition = getWeatherCondition(current.weatherCode)
@@ -50,9 +62,7 @@ export default function CurrentConditions({ location }: CurrentConditionsProps) 
 
   return (
     <div
-      aria-live="polite"
-      aria-atomic="true"
-      className="rounded-2xl p-6 bg-gradient-to-br from-slate-700 to-slate-800 space-y-4"
+      className="rounded-2xl p-6 bg-gradient-to-br from-slate-700/80 to-slate-800/80 backdrop-blur-sm space-y-4"
     >
       {/* Location name */}
       <h2 className="text-lg font-medium text-slate-300">
@@ -106,6 +116,8 @@ export default function CurrentConditions({ location }: CurrentConditionsProps) 
     </div>
   )
 }
+
+
 
 export function CurrentConditionsSkeleton() {
   return (
