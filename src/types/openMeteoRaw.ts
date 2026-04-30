@@ -13,6 +13,7 @@ export interface OpenMeteoResponse {
     wind_speed_10m: number
     wind_direction_10m: number
     is_day: number // 0 or 1
+    visibility: number // metres
   }
   hourly: {
     time: string[]

@@ -20,6 +20,7 @@ export async function fetchWeather(
       'wind_speed_10m',
       'wind_direction_10m',
       'is_day',
+      'visibility',
     ].join(','),
     hourly: [
       'temperature_2m',
