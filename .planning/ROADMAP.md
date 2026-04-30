@@ -10,7 +10,7 @@ A four-phase build delivering a frontend-only weather application that answers "
 - Integer phases (1, 2, 3, 4): Planned v1.0 milestone work
 - Decimal phases (e.g., 2.1): Urgent insertions via `/pivota_spec-insert-phase` if needed
 
-- [ ] **Phase 1: Foundation + Current Conditions** - Working app scaffold with live current weather for any searched location
+- [x] **Phase 1: Foundation + Current Conditions** - Working app scaffold with live current weather for any searched location
 - [ ] **Phase 2: Forecast Views** - Complete hourly + 7-day forecast with precipitation and temperature trend chart
 - [ ] **Phase 3: Details + Polish** - Secondary weather metrics, condition-aware visual identity, freshness indicators
 - [ ] **Phase 4: Quality + Accessibility Hardening** - WCAG AA compliant, production-deployed, all error/edge cases handled
@@ -18,16 +18,16 @@ A four-phase build delivering a frontend-only weather application that answers "
 ## Phase Details
 
 ### Phase 1: Foundation + Current Conditions
-**Status**: In Progress
+**Status**: Complete
 **Goal**: Users can instantly see current weather conditions for any location they search for
 **Depends on**: Nothing (first phase)
 **Requirements**: REQ-01 (location search), REQ-02 (current conditions)
 **Success Criteria** (what must be TRUE):
-  1. User can type a city name and see matching suggestions after 2+ characters; selecting one loads weather data
-  2. User can see current temperature (large/dominant), feels-like temperature, weather condition with icon and text label, today's high/low, humidity, wind speed, and precipitation probability
-  3. User can tap a GPS button to auto-detect location; if permission is denied, the search input remains usable with no blank screen or stuck state
-  4. User can toggle between °C and °F, and the preference persists after page reload
-  5. User sees a skeleton loading state while data is fetching and a clear error message if the API call fails — never a blank screen
+  1. ✅ User can type a city name and see matching suggestions after 2+ characters; selecting one loads weather data
+  2. ✅ User can see current temperature (large/dominant), feels-like temperature, weather condition with icon and text label, today's high/low, humidity, wind speed, and precipitation probability
+  3. ✅ User can tap a GPS button to auto-detect location; if permission is denied, the search input remains usable with no blank screen or stuck state
+  4. ✅ User can toggle between °C and °F, and the preference persists after page reload
+  5. ✅ User sees a skeleton loading state while data is fetching and a clear error message if the API call fails — never a blank screen
 **Plans**: 5 plans
 
 Plans:
@@ -97,7 +97,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation + Current Conditions | 0/5 | Planned | - |
+| 1. Foundation + Current Conditions | 5/5 | Complete | 2026-04-30 |
 | 2. Forecast Views | 0/3 | Not started | - |
 | 3. Details + Polish | 0/4 | Not started | - |
 | 4. Quality + Accessibility Hardening | 0/4 | Not started | - |
@@ -148,5 +148,6 @@ Per research — these must be correct from the start or they break everything:
 
 ---
 *Roadmap created: 2026-04-29*
+*Phase 1 completed: 2026-04-30*
 *Based on: PROJECT.md + research/SUMMARY.md*
 *Granularity: Standard (5-8 phases → 4 phases, appropriate for focused scope)*
