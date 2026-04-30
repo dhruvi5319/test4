@@ -18,6 +18,7 @@ A four-phase build delivering a frontend-only weather application that answers "
 ## Phase Details
 
 ### Phase 1: Foundation + Current Conditions
+**Status**: In Progress
 **Goal**: Users can instantly see current weather conditions for any location they search for
 **Depends on**: Nothing (first phase)
 **Requirements**: REQ-01 (location search), REQ-02 (current conditions)
